@@ -1,0 +1,21 @@
+== CLARIN website custom Drupal 7 modules and themes 
+
+This project produces the CLARIN Horizon subtheme for http://drupal-bootstrap.org/api/bootstrap/7[Drupal Bootstrap].
+On every tagged commit, Travis CI runs link:build.sh[`build.sh`] and adds the produced artifacts to the respective release item on GitHub.
+
+To edit the subtheme, please use your own fork of this repository.
+Mind to enable Travis CI for that project on `https://travis-ci.org/profile/YOUR_GITHUB_LOGIN`.
+Moreover, you have to have set the secret environment variable `DEPLOY_OAUTH_TOKEN` within the Travis CI project settings to the appropriate https://docs.travis-ci.com/user/deployment/releases/#Authenticating-with-an-Oauth-token[OAuth token].
+
+=== Build process
+
+The build.sh script does the following:
+
+. Installs the https://github.com/less/less-plugin-clean-css[less compresser/compiler] (via npm)
+. Retrieves the https://github.com/drupalprojects/bootstrap[Drupal bootstrap theme]
+. Uses the 'less starter kit' from that theme as a template by copying it to the distribution directory `~/CLARIN_Horizon`
+. Overlays a fixed set of files from the `sites/all/themes/CLARIN_Horizon` directory (see script for details)
+. Imports the https://github.com/clarin-eric/base_style[CLARIN base style LESS package] into the distribution directory (replacing the existing `boostrap` directory)
+. Incorporates the LESS files for the CLARIN Bootstrap wrapper and CLARIN additional style classes
+. Compiles the root LESS file of this modified starter kit in the distribution directory to the main `css/style.css` file
+. Compresses the entire distribution directory into a tarball `~/CLARIN_Horizon.tgz`
