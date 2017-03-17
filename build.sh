@@ -19,7 +19,7 @@ ${RM} -fr -- "${BUILD_DIRECTORY}" "${BUILD_PACKAGE}" "${OUTPUT_DIRECTORY}/basest
 
 # Create transient directories
 mkdir -p "${OUTPUT_DIRECTORY}/basestyle"
-
+mkdir -p "${OUTPUT_DIRECTORY}/bootstrap"
 
 # Install less compiler if not installed yet
 if ! [ hash lessc 2>/dev/null ]; then
@@ -38,7 +38,7 @@ echo 'Retrieving dependencies...'
 # Retrieve bootstrap drupal theme
 curl --fail --location --show-error --silent --tlsv1 \
     "https://github.com/drupalprojects/bootstrap/archive/${DRUPAL_BOOTSTRAP_VERSION}.tar.gz" | \
-        tar -x -z -p -C "${OUTPUT_DIRECTORY}/" -f -
+        tar -x -z -p --strip-components 1 -C "${OUTPUT_DIRECTORY}/bootstrap/" -f - "bootstrap-${DRUPAL_BOOTSTRAP_VERSION}"
 
 # Retrieve CLARIN base style
 curl --fail --location --show-error --silent --tlsv1 \
@@ -48,7 +48,7 @@ curl --fail --location --show-error --silent --tlsv1 \
 echo 'Customising...'
 # Prepare less sources transient directory inside basestyle
 ## Copy drupal bootstrap less files to basestyle
-rsync --ignore-existing -r "${OUTPUT_DIRECTORY}/bootstrap-${DRUPAL_BOOTSTRAP_VERSION}/starterkits/less/less" "${OUTPUT_DIRECTORY}/basestyle/"
+rsync --ignore-existing -r "${OUTPUT_DIRECTORY}/bootstrap/starterkits/less/less" "${OUTPUT_DIRECTORY}/basestyle/"
 ## Copy source style.less to basetyle
 rsync -r "${BASE_DIRECTORY}/src/less/" "${OUTPUT_DIRECTORY}/basestyle/less/"
 
@@ -64,7 +64,7 @@ ${LESSC} "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "$
 
 echo 'Packaging...'
 ## Make distribution
-tar -c -p -z -f "${BUILD_PACKAGE}" -C "${OUTPUT_DIRECTORY}" "CLARIN_Horizon" "bootstrap-${DRUPAL_BOOTSTRAP_VERSION}"
+tar -c -p -z -f "${BUILD_PACKAGE}" -C "${OUTPUT_DIRECTORY}" "CLARIN_Horizon" "bootstrap"
 
 echo 'Done!
 
