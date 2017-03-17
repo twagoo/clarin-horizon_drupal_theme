@@ -1,4 +1,4 @@
-== CLARIN website - custom Drupal 7 bootstrap subtheme
+== CLARIN Horizon - custom Drupal 7 bootstrap subtheme for the CLARIN website
 
 This project produces the CLARIN Horizon subtheme for http://drupal-bootstrap.org/api/bootstrap/7[Drupal Bootstrap].
 On every tagged commit, Travis CI runs link:build.sh[`build.sh`] and adds the produced artifacts to the respective release item on GitHub.
