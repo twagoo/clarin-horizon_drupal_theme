@@ -1,7 +1,8 @@
-== CLARIN website custom Drupal 7 modules and themes 
+== CLARIN website - custom Drupal 7 bootstrap subtheme
 
 This project produces the CLARIN Horizon subtheme for http://drupal-bootstrap.org/api/bootstrap/7[Drupal Bootstrap].
 On every tagged commit, Travis CI runs link:build.sh[`build.sh`] and adds the produced artifacts to the respective release item on GitHub.
+The release package includes the built CLARIN Horizon subtheme together with a vanilla Drupal 7 Bootstrap theme.
 
 To edit the subtheme, please use your own fork of this repository.
 Mind to enable Travis CI for that project on `https://travis-ci.org/profile/YOUR_GITHUB_LOGIN`.
@@ -13,9 +14,10 @@ The build.sh script does the following:
 
 . Installs the https://github.com/less/less-plugin-clean-css[less compresser/compiler] (via npm)
 . Retrieves the https://github.com/drupalprojects/bootstrap[Drupal bootstrap theme]
-. Uses the 'less starter kit' from that theme as a template by copying it to the distribution directory `~/CLARIN_Horizon`
-. Overlays a fixed set of files from the `sites/all/themes/CLARIN_Horizon` directory (see script for details)
-. Imports the https://github.com/clarin-eric/base_style[CLARIN base style LESS package] into the distribution directory (replacing the existing `boostrap` directory)
-. Incorporates the LESS files for the CLARIN Bootstrap wrapper and CLARIN additional style classes
-. Compiles the root LESS file of this modified starter kit in the distribution directory to the main `css/style.css` file
-. Compresses the entire distribution directory into a tarball `~/CLARIN_Horizon.tgz`
+. Retrieves the https://github.com/clarin-eric/base_style[CLARIN base style LESS package]
+. Imports the 'less starter kit' from the 'Drupal bootstrap theme' into the 'CLARIN base style LESS package' (without overriding original files)
+. Imports the root LESS file `src/theme/style.less` into the 'CLARIN base style LESS package'
+. Creates the subtheme distribution directory `target/CLARIN_Horizon` from the fixed set of static files in the `src/theme` directory (see script for details)
+. Imports the CLARIN base style fonts directory into the subtheme distribution directory
+. Compiles the root LESS file of this modified 'CLARIN base style LESS package' to the main `css/style.css` file inside the subtheme distribution directory
+. Packages the subtheme distribution directory together with the original 'Drupal bootstrap theme' into a tarball `target/CLARIN_Horizon.tgz`
