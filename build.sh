@@ -43,7 +43,7 @@ curl --fail --location --show-error --silent --tlsv1 \
 # Retrieve CLARIN base style
 curl --fail --location --show-error --silent --tlsv1 \
 	"${BASE_STYLE_REPOSITORY}/releases/download/${BASE_STYLE_VERSION}/base-style-${BASE_STYLE_VERSION}-less-with-bootstrap.jar" | \
-	tar -x -p -C ${OUTPUT_DIRECTORY}/basestyle -f -
+	bsdtar -x -p -C ${OUTPUT_DIRECTORY}/basestyle -f -
 
 echo 'Customising...'
 # Prepare less sources transient directory inside basestyle
@@ -64,7 +64,7 @@ ${LESSC} "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "$
 
 echo 'Packaging...'
 ## Make distribution
-bsdtar -c -p -z -f "${BUILD_PACKAGE}" -C "${OUTPUT_DIRECTORY}" "CLARIN_Horizon" "bootstrap"
+tar -c -p -z -f "${BUILD_PACKAGE}" -C "${OUTPUT_DIRECTORY}" "CLARIN_Horizon" "bootstrap"
 
 echo 'Done!
 
