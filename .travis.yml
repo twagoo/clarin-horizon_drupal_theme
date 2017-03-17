@@ -4,6 +4,7 @@ git:
 addons:
   apt:
     packages:
+    - bsdtar
     - curl
     - nodejs
     - rsync
