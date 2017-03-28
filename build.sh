@@ -2,6 +2,7 @@
 DRUPAL_BOOTSTRAP_VERSION="7.x-3.12"
 BASE_STYLE_REPOSITORY="https://github.com/twagoo/base_style"
 BASE_STYLE_VERSION="0.2.0-dev1"
+BOOTSTRAP_VERSION="3.3.7"
 
 BASE_DIRECTORY=$(cd "$(dirname "$BASH_SOURCE[0]")"; pwd)
 OUTPUT_DIRECTORY="${BASE_DIRECTORY}/target"
@@ -20,6 +21,8 @@ ${RM} -fr -- "${BUILD_DIRECTORY}" "${BUILD_PACKAGE}" "${OUTPUT_DIRECTORY}/basest
 # Create transient directories
 mkdir -p "${OUTPUT_DIRECTORY}/basestyle"
 mkdir -p "${OUTPUT_DIRECTORY}/bootstrap"
+mkdir -p "${BUILD_DIRECTORY}/js/bootstrap"
+
 
 # Install less compiler if not installed yet
 if ! [ hash lessc 2>/dev/null ]; then
@@ -44,6 +47,13 @@ curl --fail --location --show-error --silent --tlsv1 \
 curl --fail --location --show-error --silent --tlsv1 \
 	"${BASE_STYLE_REPOSITORY}/releases/download/${BASE_STYLE_VERSION}/base-style-${BASE_STYLE_VERSION}-less-with-bootstrap.jar" | \
 	bsdtar -x -p -C ${OUTPUT_DIRECTORY}/basestyle -f -
+
+# Retrieve bootstrap.js library
+(cd ${BUILD_DIRECTORY}/js/bootstrap; \
+    curl --fail --location --show-error --silent --tlsv1 \
+        -O "https://cdn.jsdelivr.net/bootstrap/${BOOTSTRAP_VERSION}/js/bootstrap.js"; \
+    curl --fail --location --show-error --silent --tlsv1 \
+        -O "https://cdn.jsdelivr.net/bootstrap/${BOOTSTRAP_VERSION}/js/bootstrap.min.js";)
 
 echo 'Customising...'
 # Prepare less sources transient directory inside basestyle
