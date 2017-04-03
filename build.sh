@@ -1,8 +1,7 @@
 #!/bin/sh
 DRUPAL_BOOTSTRAP_VERSION="7.x-3.12"
-BASE_STYLE_REPOSITORY="https://github.com/twagoo/base_style"
-BASE_STYLE_VERSION="0.2.0-dev1"
-BOOTSTRAP_VERSION="3.3.7"
+BASE_STYLE_REPOSITORY="https://github.com/clarin-eric/base_style"
+BASE_STYLE_VERSION="0.2.0"
 
 BASE_DIRECTORY=$(cd "$(dirname "$BASH_SOURCE[0]")"; pwd)
 OUTPUT_DIRECTORY="${BASE_DIRECTORY}/target"
@@ -21,7 +20,7 @@ ${RM} -fr -- "${BUILD_DIRECTORY}" "${BUILD_PACKAGE}" "${OUTPUT_DIRECTORY}/basest
 # Create transient directories
 mkdir -p "${OUTPUT_DIRECTORY}/basestyle"
 mkdir -p "${OUTPUT_DIRECTORY}/bootstrap"
-mkdir -p "${BUILD_DIRECTORY}/js/bootstrap"
+mkdir -p "${BUILD_DIRECTORY}/js"
 
 
 # Install less compiler if not installed yet
@@ -48,13 +47,6 @@ curl --fail --location --show-error --silent --tlsv1 \
 	"${BASE_STYLE_REPOSITORY}/releases/download/${BASE_STYLE_VERSION}/base-style-${BASE_STYLE_VERSION}-less-with-bootstrap.jar" | \
 	bsdtar -x -p -C ${OUTPUT_DIRECTORY}/basestyle -f -
 
-# Retrieve bootstrap.js library
-(cd ${BUILD_DIRECTORY}/js/bootstrap; \
-    curl --fail --location --show-error --silent --tlsv1 \
-        -O "https://cdn.jsdelivr.net/bootstrap/${BOOTSTRAP_VERSION}/js/bootstrap.js"; \
-    curl --fail --location --show-error --silent --tlsv1 \
-        -O "https://cdn.jsdelivr.net/bootstrap/${BOOTSTRAP_VERSION}/js/bootstrap.min.js";)
-
 echo 'Customising...'
 # Prepare less sources transient directory inside basestyle
 ## Copy drupal bootstrap less files to basestyle
@@ -62,10 +54,12 @@ rsync --ignore-existing -r "${OUTPUT_DIRECTORY}/bootstrap/starterkits/less/less"
 ## Copy source style.less to basetyle
 rsync -r "${BASE_DIRECTORY}/src/less/" "${OUTPUT_DIRECTORY}/basestyle/less/"
 
-# Copy static theme resources into build directory
+# Copy static theme resources into package directory
 rsync -r "${BASE_DIRECTORY}/src/theme/" "${BUILD_DIRECTORY}"
-## Move fonts into build directory
+## Move fonts into package directory
 mv -f -- "${OUTPUT_DIRECTORY}/basestyle/fonts" "${BUILD_DIRECTORY}"
+## Move bootstrap.js library into package directory
+mv -f -- "${OUTPUT_DIRECTORY}/basestyle/js/" "${BUILD_DIRECTORY}/js/bootstrap"
 
 echo 'Compiling LESS...'
 ## Compile style from basedstyle less folder
