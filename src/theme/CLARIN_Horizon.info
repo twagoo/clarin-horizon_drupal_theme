@@ -33,7 +33,3 @@ stylesheets[all][] = css/style.css
 
 ;scripts[] = 'js/bootstrap/bootstrap.js'
 scripts[] = 'js/bootstrap/bootstrap.min.js'
-
-
-; Disable BootstrapCDN so the compiled LESS source files can be used.
-settings[bootstrap_cdn] = ''
