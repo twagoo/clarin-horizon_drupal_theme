@@ -5,3 +5,6 @@
 .sass-cache
 
 target
+/.externalToolBuilders/
+/.project
+/.settings/
