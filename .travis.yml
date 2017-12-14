@@ -15,7 +15,7 @@ env:
 deploy:
   api_key:
     secure: "$DEPLOY_OAUTH_TOKEN"
-  file: "CLARIN_Horizon-${THEME_VERSION}.tgz"
+  file: "build/clarin-eric/clarin-horizon_drupal_theme/target/CLARIN_Horizon-${THEME_VERSION}.tgz"
   on:
     tags: true
   overwrite: true
