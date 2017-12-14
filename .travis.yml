@@ -10,10 +10,12 @@ addons:
     - rsync
 script:
   - sh -x ./build.sh
+env:
+  - THEME_VERSION="0.1.0"
 deploy:
   api_key:
     secure: "$DEPLOY_OAUTH_TOKEN"
-  file: "$HOME/CLARIN_Horizon.tgz"
+  file: "$HOME/CLARIN_Horizon-${THEME_VERSION}.tgz"
   on:
     tags: true
   overwrite: true
