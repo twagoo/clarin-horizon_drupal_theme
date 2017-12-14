@@ -15,7 +15,7 @@ env:
 deploy:
   api_key:
     secure: "$DEPLOY_OAUTH_TOKEN"
-  file: "$HOME/CLARIN_Horizon-${THEME_VERSION}.tgz"
+  file: "CLARIN_Horizon-${THEME_VERSION}.tgz"
   on:
     tags: true
   overwrite: true
