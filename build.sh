@@ -68,6 +68,7 @@ mkdir -p "${BUILD_DIRECTORY}/css"
 pwd
 cd `dirname ${LESSC}`
 pwd
+ls -Fla
 ./lessc "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
 
 echo 'Packaging...'
