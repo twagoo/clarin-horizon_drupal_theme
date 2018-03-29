@@ -1,5 +1,5 @@
 #!/bin/sh
-PACKAGE_VERSION="0.1.1"
+PACKAGE_VERSION="0.1.2"
 DRUPAL_BOOTSTRAP_VERSION="7.x-3.12"
 BASE_STYLE_REPOSITORY="https://github.com/clarin-eric/base_style"
 BASE_STYLE_VERSION="0.2.0"

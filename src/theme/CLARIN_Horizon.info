@@ -25,11 +25,12 @@ regions[page_bottom]    = 'Page bottom'
 ;;;;;;;;;;;;;;;;;;;;;
 
 stylesheets[all][] = css/style.css
-
+stylesheets[all][] = css/bootstrap-toc.css
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Scripts
 ;;;;;;;;;;;;;;;;;;;;;
 
-;scripts[] = 'js/bootstrap/bootstrap.js'
 scripts[] = 'js/bootstrap/bootstrap.min.js'
+scripts[] = 'js/bootstrap-toc.js'
+scripts[] = 'js/toc-clarin.js'
