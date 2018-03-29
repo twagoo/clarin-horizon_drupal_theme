@@ -28,6 +28,7 @@ mkdir -p "${BUILD_DIRECTORY}/js"
 if ! [ hash lessc 2>/dev/null ]; then
 	if [ ! -f "${LOCAL_LESSC}" ]; then
     	echo 'Installing LESS compiler...'
+        npm cache clean
     	npm set progress='false'
     	npm  install --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less' 1>/dev/null
         npm  install --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less-plugin-clean-css' 1>/dev/null
