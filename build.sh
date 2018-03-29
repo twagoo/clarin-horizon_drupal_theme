@@ -65,8 +65,8 @@ mv -f -- "${OUTPUT_DIRECTORY}/basestyle/js/" "${BUILD_DIRECTORY}/js/bootstrap"
 echo 'Compiling LESS...'
 ## Compile style from basedstyle less folder
 mkdir -p "${BUILD_DIRECTORY}/css"
-${LESSC} "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
 pwd
+${LESSC} "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
 
 echo 'Packaging...'
 ## Make distribution
