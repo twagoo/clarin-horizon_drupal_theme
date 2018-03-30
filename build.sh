@@ -29,12 +29,15 @@ if ! [ hash lessc 2>/dev/null ]; then
 	if [ ! -f "${LOCAL_LESSC}" ]; then
     	echo 'Installing LESS compiler...'
     	npm set progress='false'
-    	npm install --prefix=${OUTPUT_DIRECTORY} 'less@2.7.3' 'less-plugin-clean-css'
+    	npm install 'less' 'less-plugin-clean-css' -g
     fi
     LESSC=${LOCAL_LESSC}
 else
 	LESSC=`which lessc`
 fi
+
+LESSC=`which lessc`
+
 echo 'Using lessc: ' ${LESSC}
 
 echo 'Retrieving dependencies...'
@@ -65,7 +68,7 @@ mv -f -- "${OUTPUT_DIRECTORY}/basestyle/js/" "${BUILD_DIRECTORY}/js/bootstrap"
 echo 'Compiling LESS...'
 ## Compile style from basedstyle less folder
 mkdir -p "${BUILD_DIRECTORY}/css"
-${LESSC} "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
+less "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
 
 echo 'Packaging...'
 ## Make distribution
