@@ -29,12 +29,10 @@ if ! [ hash lessc 2>/dev/null ]; then
 	if [ ! -f "${LOCAL_LESSC}" ]; then
     	echo 'Installing LESS compiler...'
     	npm set progress='false'
-    	npm  install  --depth '0' 'less' 'less-plugin-clean-css' 1>/dev/null
+    	npm install --depth '0' 'less' 'less-plugin-clean-css' 1>/dev/null
     fi
-    LESSC=${LOCAL_LESSC}
-else
-	LESSC=`which lessc`
 fi
+LESSC=`which lessc`
 echo 'Using lessc: ' ${LESSC}
 
 echo 'Retrieving dependencies...'
