@@ -27,7 +27,7 @@ mkdir -p "${BUILD_DIRECTORY}/js"
 # Install less compiler if not installed yet
 if ! [ hash lessc 2>/dev/null ]; then
 	if [ ! -f "${LOCAL_LESSC}" ]; then
-        npm init -y ${OUTPUT_DIRECTORY}
+        npm init -y ${OUTPUT_DIRECTORY}/target
     	echo 'Installing LESS compiler...'
     	npm set progress='false'
     	npm install --prefix=${OUTPUT_DIRECTORY} 'less@2.7.3'
