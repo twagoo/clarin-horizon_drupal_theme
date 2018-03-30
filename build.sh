@@ -29,7 +29,8 @@ if ! [ hash lessc 2>/dev/null ]; then
 	if [ ! -f "${LOCAL_LESSC}" ]; then
     	echo 'Installing LESS compiler...'
     	npm set progress='false'
-    	npm --silent install --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less-plugin-clean-css' 'less' 1>/dev/null
+    	npm  install --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less' 'less-plugin-clean-css' 1>/dev/null
+        find . /home/travis/build/clarin-eric/clarin-horizon_drupal_theme/target/node_modules/less
     fi
     LESSC=${LOCAL_LESSC}
 else
