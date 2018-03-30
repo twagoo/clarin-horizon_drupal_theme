@@ -30,7 +30,7 @@ if ! [ hash lessc 2>/dev/null ]; then
     	echo 'Installing LESS compiler...'
     	npm set progress='false'
     	npm install --prefix=${OUTPUT_DIRECTORY} 'less'
-        npm install --prefix=${OUTPUT_DIRECTORY} 'less-plugin-clean-css'
+        npm install --prefix=${OUTPUT_DIRECTORY}/node_modules/less/ 'less-plugin-clean-css'
 
     fi
     LESSC=${LOCAL_LESSC}
