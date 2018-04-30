@@ -27,7 +27,7 @@ mkdir -p "${BUILD_DIRECTORY}/js"
 if ! [ hash lessc 2>/dev/null ]; then
     echo 'Installing LESS compiler...'
     npm set progress='false'
-    npm install --silent --depth '0' 'less' 'less-plugin-clean-css' -g
+    npm install --silent --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less@2.7.3' 'less-plugin-clean-css'
 fi
 
 echo 'Retrieving dependencies...'
