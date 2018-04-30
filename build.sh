@@ -13,6 +13,7 @@ set -e
 
 #gcp and grm can be installed on MacOS via brew. Run "brew install coreutils" to do so.
 RM=`which grm||which rm`  #if grm available (on Mac), use it instead of BSD rm
+LESSC=`which lessc`
 
 # Cleanup potential previous build output
 ${RM} -fr -- "${BUILD_DIRECTORY}" "${BUILD_PACKAGE}" "${OUTPUT_DIRECTORY}/basestyle"
@@ -28,7 +29,10 @@ if ! [ hash lessc 2>/dev/null ]; then
     echo 'Installing LESS compiler...'
     npm set progress='false'
     npm install --silent --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less@2.7.3' 'less-plugin-clean-css'
+    LESSC=${OUTPUT_DIRECTORY}/'node_modules/less/bin/lessc'
 fi
+
+echo 'Using lessc: ' ${LESSC}
 
 echo 'Retrieving dependencies...'
 # Retrieve bootstrap drupal theme
