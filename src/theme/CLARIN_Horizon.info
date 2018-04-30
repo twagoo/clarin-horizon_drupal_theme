@@ -33,4 +33,4 @@ stylesheets[all][] = css/bootstrap-toc.css
 
 scripts[] = 'js/bootstrap/bootstrap.min.js'
 scripts[] = 'js/bootstrap-toc.js'
-scripts[] = 'js/toc-clarin.js'
+scripts[] = 'js/toc-clarineu.js'
