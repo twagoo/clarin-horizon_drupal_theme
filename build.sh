@@ -27,7 +27,7 @@ mkdir -p "${BUILD_DIRECTORY}/js"
 if ! [ hash lessc 2>/dev/null ]; then
     echo 'Installing LESS compiler...'
     npm set progress='false'
-    npm install 'less' 'less-plugin-clean-css' -g
+    npm install --silent --prefix=${OUTPUT_DIRECTORY} --depth '0' 'less' 'less-plugin-clean-css'
 fi
 
 echo 'Retrieving dependencies...'
@@ -58,7 +58,7 @@ mv -f -- "${OUTPUT_DIRECTORY}/basestyle/js/" "${BUILD_DIRECTORY}/js/bootstrap"
 echo 'Compiling LESS...'
 ## Compile style from basedstyle less folder
 mkdir -p "${BUILD_DIRECTORY}/css"
-less "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
+lessc "${OUTPUT_DIRECTORY}/basestyle/less/style.less" --clean-css='--s0' > "${BUILD_DIRECTORY}/css/style.css"
 
 echo 'Packaging...'
 ## Make distribution
