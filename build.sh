@@ -3,6 +3,7 @@ PACKAGE_VERSION="0.1.5"
 DRUPAL_BOOTSTRAP_VERSION="7.x-3.12"
 BASE_STYLE_REPOSITORY="https://github.com/twagoo/base_style"
 BASE_STYLE_VERSION="0.3.0-alpha3"
+BASE_STYLE_TAG="1.3.0-alpha3" #should normally be "${BASE_STYLE_VERSION}"
 
 BASE_DIRECTORY=$(cd "$(dirname "$BASH_SOURCE[0]")"; pwd)
 OUTPUT_DIRECTORY="${BASE_DIRECTORY}/target"
@@ -43,7 +44,7 @@ curl --fail --location --show-error --silent --tlsv1 \
 
 # Retrieve CLARIN base style
 curl --fail --location --show-error --silent --tlsv1 \
-	"${BASE_STYLE_REPOSITORY}/releases/download/${BASE_STYLE_VERSION}/base-style-${BASE_STYLE_VERSION}-less-with-bootstrap.jar" | \
+	"${BASE_STYLE_REPOSITORY}/releases/download/${BASE_STYLE_TAG}/base-style-${BASE_STYLE_VERSION}-less-with-bootstrap.jar" | \
 	bsdtar -x -p -C ${OUTPUT_DIRECTORY}/basestyle -f -
 
 echo 'Customising...'
